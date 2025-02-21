@@ -1,187 +1,61 @@
-import React from 'react';
+'use client';
+
+import Image from 'next/image';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const router = useRouter(); // Initialize useRouter
+
   return (
-    <footer className="bg-white dark:bg-gray-900">
-      <div className="container px-6 py-12 mx-auto">
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
-            Let’s get started on something great
-          </h2>
+    <footer className="flex justify-center px-4 text-gray-800 bg-white dark:text-white dark:bg-gray-900">
+      <div className="container px-6 py-6">
+        <h1 className="text-lg font-bold text-center lg:text-2xl">
+          Join 31,000+ others and never miss <br /> out on new tips, tutorials, and more.
+        </h1>
 
-          <p className="max-w-md mx-auto mt-2 text-gray-500 dark:text-gray-400">
-            Join over 4,000+ startups already growing with Meraki UI.
-          </p>
+        <div className="flex flex-col justify-center mx-auto mt-6 space-y-3 md:space-y-0 md:flex-row">
+          <input
+            id="email"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+            placeholder="Email Address"
+          />
 
-          <div className="flex flex-col mt-6 sm:flex-row sm:items-center sm:justify-center">
-            <button className="w-full px-5 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md sm:mx-2 sm:order-2 sm:w-auto hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-              Get started
-            </button>
-          </div>
+          <button className="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-300 transform md:w-auto md:mx-4 focus:outline-none bg-gray-800 rounded-lg hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
+            Subscribe
+          </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 mt-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Product</h3>
+        <hr className="h-px bg-gray-200 border-none my-7 dark:bg-gray-700" />
 
-            <div className="flex flex-col items-start mt-4 space-y-4">
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Overview
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Features
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Solutions
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Tutorials
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Pricing
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Releases
-              </a>
+        <div className="flex flex-col items-center justify-between md:flex-row">
+          <button onClick={() => router.push('/')}>
+            <Image className="w-auto h-7" src="https://merakiui.com/images/full-logo.svg" alt="Logo" width={120} height={28} />
+          </button>
+
+          <div className="flex mt-4 md:m-0">
+            <div className="-mx-4">
+              <button onClick={() => router.push('/')} className="px-4 text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 hover:underline">
+                Home
+              </button>
+              <button onClick={() => router.push('/Subscription')} className="px-4 text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 hover:underline">
+                Subscribe
+              </button>
+              <button onClick={() => router.push('/Hire')} className="px-4 text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 hover:underline">
+                Get Hire
+              </button>
+              <button onClick={() => router.push('/About')} className="px-4 text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 hover:underline">
+                About
+              </button>
+              <button onClick={() => router.push('/Support')} className="px-4 text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 hover:underline">
+                Support
+              </button>
             </div>
           </div>
-
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Company</h3>
-
-            <div className="flex flex-col items-start mt-4 space-y-4">
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                About us
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Careers
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Press
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                News
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Media kit
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Contact
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Resources</h3>
-
-            <div className="flex flex-col items-start mt-4 space-y-4">
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Blog
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Newsletter
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Events
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Help center
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Tutorials
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Supports
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Use cases</h3>
-
-            <div className="flex flex-col items-start mt-4 space-y-4">
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Startups
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Enterprise
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Government
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Saas
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Marketplaces
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Ecommerce
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Social</h3>
-
-            <div className="flex flex-col items-start mt-4 space-y-4">
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Twitter
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                LinkedIn
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Github
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Facebook
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                AngelList
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Dribble
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Legal</h3>
-
-            <div className="flex flex-col items-start mt-4 space-y-4">
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Terms
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Privacy
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Cookies
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Licenses
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Settings
-              </a>
-              <a href="#" className="text-gray-700 transition-colors duration-200 dark:text-gray-200 dark:hover:text-blue-400 hover:underline hover:text-blue-600">
-                Contact
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
-
-        <div className="flex flex-col items-center justify-between sm:flex-row">
-          <a href="#">
-            <img className="w-auto h-7" src="https://merakiui.com/images/full-logo.svg" alt="" />
-          </a>
-
-          <p className="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-300">
-            © Copyright 2023. All Rights Reserved.
-          </p>
         </div>
       </div>
     </footer>
