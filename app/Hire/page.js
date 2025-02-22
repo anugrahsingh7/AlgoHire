@@ -9,6 +9,7 @@ import {
   FaCalendar,
   FaGraduationCap,
 } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const Cards = () => {
   const [filters, setFilters] = useState({
@@ -27,6 +28,8 @@ const Cards = () => {
   const [searchQuery, setSearchQuery] = useState(""); // Search query state
   const [isFilterOpen, setIsFilterOpen] = useState(true); // State to toggle filter visibility
   const [isSkillsOpen, setIsSkillsOpen] = useState(false); // State to toggle skills filter visibility
+
+  const router = useRouter();
 
   const cardsData = [
     {
@@ -405,6 +408,12 @@ const Cards = () => {
   const JobModal = ({ job, onClose }) => {
     if (!job) return null;
 
+    const handleGiveTest = () => {
+      // Store the selected job data in localStorage before navigation
+      localStorage.setItem('selectedJobTest', JSON.stringify(job));
+      router.push("/Test");
+    };
+
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -521,7 +530,10 @@ const Cards = () => {
 
             {/* Apply Button */}
             <div className="flex justify-end pt-4 border-t">
-              <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors">
+              <button
+                onClick={handleGiveTest}
+                className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
+              >
                 Give Test
               </button>
             </div>
