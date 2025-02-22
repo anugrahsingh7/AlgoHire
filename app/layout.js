@@ -1,5 +1,6 @@
-'use client'
+'use client';
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import Footer from "./_components/Footer";
 import Sidebar from "./_components/Sidebar";
@@ -7,21 +8,20 @@ import Navbar from "./_components/Navbar";
 import "./globals.css";
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname(); // Get the current route
+  const pathname = usePathname(); 
+  const hiddenRoutes = ["/Login", "/Signup"];
 
-  // List of pages where Navbar and Footer should NOT be displayed
-  const hiddenRoutes = ["/Login", "/Signup" ];
+  const [userData, setUserData] = useState(null);
+
+  // Fetch user data from user.json
+  
 
   return (
     <html lang="en">
       <body>
-        {/* Render Navbar only if the current route is NOT in hiddenRoutes */}
         {!hiddenRoutes.includes(pathname) && <Navbar />}
-        <Sidebar/>
-
+        <Sidebar /> {/* Pass user data to Sidebar */}
         <main className="w-screen min-h-max overflow-hidden">{children}</main>
-
-        {/* Render Footer only if the current route is NOT in hiddenRoutes */}
         {!hiddenRoutes.includes(pathname) && <Footer />}
       </body>
     </html>
