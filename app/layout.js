@@ -7,9 +7,9 @@ import Sidebar from "./_components/Sidebar";
 import Navbar from "./_components/Navbar";
 import "./globals.css";
 
-export default async function RootLayout({ children }) {
+export default function RootLayout({ children }) {
   const pathname = usePathname();
-  const hiddenRoutes = ["/Login", "/Signup"];
+  const hiddenRoutes = ["/auth/Login", "/auth/Signup"];
 
   return (
     <html lang="en">
