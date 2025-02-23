@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
-import {useRouter} from "next/navigation"
-import { RiMenu4Line } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
+import { RiMenu4Line } from "react-icons/ri";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +14,6 @@ export default function Navbar() {
       <div className="container px-6 py-4 mx-auto">
         <div className="lg:flex lg:items-center lg:justify-between">
           <div className="flex items-center justify-between">
-         
-          
             <button onClick={() => router.push("/")}>
               <img
                 className="w-auto h-6 sm:h-7"
@@ -37,7 +34,7 @@ export default function Navbar() {
                 {!isOpen ? (
                   <RiMenu4Line className="text-2xl" />
                 ) : (
-                  <IoClose className="text-2xl"/>
+                  <IoClose className="text-2xl" />
                 )}
               </button>
             </div>
@@ -59,19 +56,19 @@ export default function Navbar() {
                 Home
               </button>
               <button
-               onClick={() => router.push("/Subscription")}
+                onClick={() => router.push("/Subscription")}
                 className="px-3 py-2 mx-0 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 Subscribe
               </button>
               <button
-               onClick={() => router.push("/Hire")}
+                onClick={() => router.push("/Hire")}
                 className="px-3 py-2 mx-0 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 Get Hire
               </button>
               <button
-               onClick={() => router.push("/About")}
+                onClick={() => router.push("/About")}
                 className="px-3 py-2 mx-0 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 About
@@ -85,16 +82,11 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center mt-4 lg:mt-0">
-             
-               
-
               <button
                 type="button"
                 className="flex items-center focus:outline-none"
                 aria-label="toggle profile dropdown"
-              >
-                
-              </button>
+              ></button>
             </div>
           </div>
         </div>
