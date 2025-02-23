@@ -17,9 +17,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
         await connectToDatabase(); // Ensure MongoDB is connected
 
-        console.log("🔥 AUTHORIZE CALLED");
-        console.log("Received credentials:", credentials);
-
         if (!credentials.email || !credentials.password) {
           throw new Error("Missing email or password");
         }
@@ -29,13 +26,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         console.log("User from DB:", user);
         if (!user) throw new Error("User not found");
 
-        console.log("YE EXECUTE NAHI HUA");
         const isValid = await bcrypt.compare(
           credentials.password,
           user.password
         );
         if (!isValid) throw new Error("Incorrect password");
-        console.log("BAs pahuch gya");
+
         return {
           id: user._id.toString(),
           name: user.name,

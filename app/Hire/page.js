@@ -410,7 +410,7 @@ const Cards = () => {
 
     const handleGiveTest = () => {
       // Store the selected job data in localStorage before navigation
-      localStorage.setItem('selectedJobTest', JSON.stringify(job));
+      localStorage.setItem("selectedJobTest", JSON.stringify(job));
       router.push("/Test");
     };
 

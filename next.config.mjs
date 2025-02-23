@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
-      appDir: true,
-    },
-  };
-  
-  export default nextConfig;
-  
+  experimental: {
+    middlewareMatcher: [
+      {
+        source: "/Hire*",
+      },
+    ],
+    appDir: true,
+  },
+};
+
+export default nextConfig;
