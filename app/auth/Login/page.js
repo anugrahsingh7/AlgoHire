@@ -68,6 +68,20 @@ export default function Login() {
           </span>
         </button>
 
+        <button 
+        onClick={()=>signIn("github",{ callbackUrl: "/" })}
+        className="flex items-center justify-center w-full mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <div className="px-4 py-2">
+            {/* Google Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 40 40">
+              {/* SVG Path */}
+            </svg>
+          </div>
+          <span className="w-5/6 px-4 py-3 font-bold text-center">
+            Sign in with Github
+          </span>
+        </button>
+
         <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
           <span className="text-xs text-gray-500 uppercase dark:text-gray-400">
@@ -118,7 +132,7 @@ export default function Login() {
         <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
           <a
-            href="#"
+            href="/auth/Signup"
             className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
           >
             or sign up

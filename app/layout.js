@@ -18,7 +18,7 @@ export default async function RootLayout({ children }) {
         <SessionProvider>
           <HiddenLayoutProvider>
             <Navbar />
-            <Sidebar />
+            <Sidebar userData={userData}/>
           </HiddenLayoutProvider>
           <main className="w-screen min-h-max overflow-hidden">{children}</main>
           <HiddenLayoutProvider>

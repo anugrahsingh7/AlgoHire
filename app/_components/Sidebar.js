@@ -18,6 +18,10 @@ export default function Sidebar({ userData }) {
   const [isActive, setIsActive] = useState(false);
   const router = useRouter();
 
+  const { data: session, status } = useSession();
+  const Data = session?.user;
+  console.log(session);
+
   return (
     <div
       className={`fixed top-0 left-0 h-screen z-10 flex transition-all duration-500 ease-in-out ${
@@ -34,7 +38,7 @@ export default function Sidebar({ userData }) {
           />
           <div>
             <h1 className="text-lg font-semibold text-white">
-              {userData?.name}
+            {status === "loading" ? "Loading..." : Data?.name || "Guest"}
             </h1>
             <Link href="/profile">
               <span className="text-sm text-white cursor-pointer hover:underline">
@@ -87,11 +91,13 @@ export default function Sidebar({ userData }) {
             <h2 className="text-lg px-3 font-semibold text-gray-900 dark:text-white">
               Skills :
             </h2>
-            <ul className="max-w-md px-3 -mt-4 mb-4 space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-              <li>React.js</li>
-              <li>Next.js</li>
-              <li>Tailwind</li>
-            </ul>
+            {Data?.skills.length > 0 ? <ul className="max-w-md px-3 -mt-4 mb-4 space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+            {Data?.skills.map(item => 
+             <li key={item}>{item}</li>
+             )}
+            </ul> : 
+             <h3 className="max-w-md px-3 -mt-4 mb-4 space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 underline">Edit your profile to add more skills</h3>
+            }
 
             <button
               onClick={() => signOut({ callbackUrl: "/auth/Login" })}
