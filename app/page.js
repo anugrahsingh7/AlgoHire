@@ -1,28 +1,22 @@
-"use client";
+import { auth } from "./_lib/auth";
 
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-
-export default function Home() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      console.log("User is authenticated:", session?.user);
-    } else if (status === "unauthenticated") {
-      router.replace("/auth/Login"); // Using replace to avoid back navigation to this page
-    }
-  }, [status, session, router]);
-
-  if (status === "loading") {
-    return <div className="h-screen w-screen flex justify-center items-center">Loading...</div>;
-  }
-
+export default async function Home() {
+  const session = await auth();
   return (
     <div className="h-screen w-screen flex justify-center items-center text-xl">
-      {session ? `Hello, I am ${session.user.name}` : "Redirecting..."}
+      {session ? (
+        `Hello, I am ${session.user.name}`
+      ) : (
+        <div className="flex flex-col items-center">
+          <div>You are not logged in</div>
+          <a
+            className="text-orange-600 bg-orange-100 p-6 m-4 "
+            href="auth/Login"
+          >
+            LOGIN
+          </a>
+        </div>
+      )}
     </div>
   );
 }

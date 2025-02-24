@@ -10,9 +10,12 @@ import {
   FaGraduationCap,
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-
-const  Cards = () => {
+const Cards = () => {
+  const { data: session, status } = useSession();
+  if (status === "loading") return <div>Loading</div>;
+  if (status === "unauthenticated") return <div>Please Log In</div>;
   const [filters, setFilters] = useState({
     location: "All",
     category: "All",

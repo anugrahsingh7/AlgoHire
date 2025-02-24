@@ -1,26 +1,31 @@
-// app/layout.js
-"use client";
-import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
-import Footer from "./_components/Footer";
-import Sidebar from "./_components/Sidebar";
 import Navbar from "./_components/Navbar";
+import Sidebar from "./_components/Sidebar";
+import Footer from "./_components/Footer";
 import "./globals.css";
+import HiddenLayoutProvider from "./_components/HiddenLayoutProvider"; // Client component for hiding logic
+import { auth } from "./_lib/auth";
+import { getUserData } from "./_lib/data-service";
+import { redirect } from "next/navigation";
+export default async function RootLayout({ children }) {
+  const session = await auth();
 
-export default function RootLayout({ children }) {
-  const pathname = usePathname();
-  const hiddenRoutes = ["/auth/Login", "/auth/Signup"];
+  const userData = await getUserData(session?.user.email);
 
   return (
-    <SessionProvider>
-      <html lang="en">
-        <body>
-          {!hiddenRoutes.includes(pathname) && <Navbar />}
-          <Sidebar />
+    <html lang="en">
+      <body>
+        <SessionProvider>
+          <HiddenLayoutProvider>
+            <Navbar />
+            <Sidebar />
+          </HiddenLayoutProvider>
           <main className="w-screen min-h-max overflow-hidden">{children}</main>
-          {!hiddenRoutes.includes(pathname) && <Footer />}
-        </body>
-      </html>
-    </SessionProvider>
+          <HiddenLayoutProvider>
+            <Footer />
+          </HiddenLayoutProvider>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }
