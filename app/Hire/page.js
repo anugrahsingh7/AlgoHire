@@ -11,7 +11,8 @@ import {
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
-const Cards = () => {
+
+const  Cards = () => {
   const [filters, setFilters] = useState({
     location: "All",
     category: "All",

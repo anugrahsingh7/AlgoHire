@@ -10,6 +10,7 @@ import { FaBriefcase } from "react-icons/fa";
 import { AiOutlineLogout } from "react-icons/ai";
 import {useRouter} from "next/navigation"
 import { useState } from "react";
+import { signOut } from "next-auth/react";
 
 export default function Sidebar({ userData }) {
   const [isActive, setIsActive] = useState(false);
@@ -66,7 +67,9 @@ export default function Sidebar({ userData }) {
               <li>Tailwind</li>
             </ul>
 
-            <button className="flex items-center w-full justify-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-red-600 hover:bg-red-700">
+            <button 
+             onClick={() => signOut({ callbackUrl: "/auth/Login" })}
+            className="flex items-center w-full justify-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-red-600 hover:bg-red-700">
               <AiOutlineLogout />
               <span className="mx-2 text-sm font-medium">Logout</span>
             </button>

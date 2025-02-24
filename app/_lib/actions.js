@@ -2,8 +2,7 @@
 import bcrypt from "bcryptjs";
 import User from "../_models/User";
 import { connectToDatabase } from "./mongoDb";
-import { auth, signIn } from "./auth";
-import { redirect } from "next/navigation";
+import { signIn } from "./auth";
 export async function registerUser(formData) {
   try {
     await connectToDatabase();
@@ -26,17 +25,15 @@ export async function registerUser(formData) {
 }
 export async function loginUser(formData) {
   const formValues = Object.fromEntries(formData);
-
   const { email, password } = formValues;
-  console.log(email, password);
+
+
   const result = await signIn("credentials", {
-    redirect: false, // Prevent automatic redirects
+    redirect:false,
     email,
     password,
   });
   console.log(result);
-
-  redirect("/");
 
   return { success: true, message: "Login successful" };
 }
