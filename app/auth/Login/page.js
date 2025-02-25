@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
-
 import { signIn, useSession } from "next-auth/react";
 import { loginUser } from "../../_lib/actions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { getSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
-
   const router = useRouter();
   const [error, setError] = useState("");
   const { data: session, status } = useSession();
@@ -21,15 +21,24 @@ export default function Login() {
     await getSession();
 
     if (result.success) {
-      router.replace("/"); // Redirect to home after login
+      toast.success("Signed in successfully!");
+      router.replace("/");
     } else {
       setError(result.message);
+      toast.error("Invalid Email or Password");
     }
   }
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await signIn("google", { callbackUrl: "/" });
+    } catch (error) {
+      toast.error("Google sign-in failed.");
+    }
+  };
+
   return (
     <div className="flex w-full h-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
-      {/* Background Image (Visible on large screens) */}
       <div
         className="hidden bg-cover lg:block lg:w-1/2"
         style={{
@@ -38,7 +47,6 @@ export default function Login() {
         }}
       ></div>
 
-      {/* Login Form */}
       <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
         <div className="flex justify-center mx-auto">
           <Image
@@ -55,30 +63,14 @@ export default function Login() {
         </p>
 
         <button 
-        onClick={()=>signIn("google",{ callbackUrl: "/" })}
-        className="flex items-center justify-center w-full mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+          onClick={handleGoogleSignIn}
+          className="flex items-center justify-center w-full mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+        >
           <div className="px-4 py-2">
-            {/* Google Icon */}
-            <svg className="w-6 h-6" viewBox="0 0 40 40">
-              {/* SVG Path */}
-            </svg>
+            <svg className="w-6 h-6" viewBox="0 0 40 40"></svg>
           </div>
           <span className="w-5/6 px-4 py-3 font-bold text-center">
             Sign in with Google
-          </span>
-        </button>
-
-        <button 
-        onClick={()=>signIn("github",{ callbackUrl: "/" })}
-        className="flex items-center justify-center w-full mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-          <div className="px-4 py-2">
-            {/* Google Icon */}
-            <svg className="w-6 h-6" viewBox="0 0 40 40">
-              {/* SVG Path */}
-            </svg>
-          </div>
-          <span className="w-5/6 px-4 py-3 font-bold text-center">
-            Sign in with Github
           </span>
         </button>
 
@@ -89,6 +81,7 @@ export default function Login() {
           </span>
           <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
         </div>
+
         <form onSubmit={handleSubmit}>
           <div className="mt-4">
             <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
@@ -129,6 +122,7 @@ export default function Login() {
             </button>
           </div>
         </form>
+
         <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
           <a

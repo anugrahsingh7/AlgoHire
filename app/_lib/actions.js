@@ -24,16 +24,26 @@ export async function registerUser(formData) {
   }
 }
 export async function loginUser(formData) {
-  const formValues = Object.fromEntries(formData);
-  const { email, password } = formValues;
+  try {
+    const formValues = Object.fromEntries(formData);
+    const { email, password } = formValues;
 
+    if (!email || !password) {
+      throw new Error("Email and password are required");
+    }
 
-  const result = await signIn("credentials", {
-    redirect:false,
-    email,
-    password,
-  });
-  console.log(result);
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
 
-  return { success: true, message: "Login successful" };
+    if (!result || result.error) {
+      throw new Error(result?.error || "Invalid email or password");
+    }
+
+    return { success: true, message: "Login successful" };
+  } catch (err) {
+    return { success: false, message: err.message };
+  }
 }

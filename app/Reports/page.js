@@ -19,7 +19,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
 export default function Reports() {
   // Sample data - replace with actual data later
   const reports = [

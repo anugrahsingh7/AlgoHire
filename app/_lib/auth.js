@@ -1,12 +1,10 @@
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import GitHubProvider from "next-auth/providers/github";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import bcrypt from "bcryptjs";
 import User from "../_models/User";
 import { clientPromise, connectToDatabase } from "./mongoDb";
-import { getUserData } from "./data-service";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
@@ -41,15 +39,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-    GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    }),
+    })
   ],
   session: { strategy: "jwt" },
   pages: {
     signIn: "/auth/Login",
+    error: "/auth/Login",
   },
   callbacks: {
     async jwt({ token, user, account }) {

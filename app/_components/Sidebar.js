@@ -13,6 +13,8 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Sidebar({ userData }) {
   const [isActive, setIsActive] = useState(false);
@@ -22,6 +24,18 @@ export default function Sidebar({ userData }) {
   const Data = session?.user;
   console.log(session);
 
+
+  async function handleSubmit() {
+    try {
+      await signOut({ redirect: false }); // Prevent default redirect
+      toast.success("Signed out successfully!",{autoClose: 1000});
+      router.push("/auth/Login");
+    } catch (error) {
+      console.error("Sign out error:", error);
+      toast.error("Failed to sign out. Please try again.");
+    }
+  }
+  
   return (
     <div
       className={`fixed top-0 left-0 h-screen z-10 flex transition-all duration-500 ease-in-out ${
@@ -100,7 +114,7 @@ export default function Sidebar({ userData }) {
             }
 
             <button
-              onClick={() => signOut({ callbackUrl: "/auth/Login" })}
+              onClick={handleSubmit}
               className="flex items-center w-full justify-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-red-600 hover:bg-red-700"
             >
               <AiOutlineLogout />
