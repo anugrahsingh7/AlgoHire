@@ -5,12 +5,11 @@ import FAQS from "../_components/FAQS";
 
 const Support = () => {
   return (
-    <>
+
     <div>
-   <Contact/>
-   <FAQS/>
+    <Contact/>
+    <FAQS/>
    </div>
-   </>
 
   );
 };

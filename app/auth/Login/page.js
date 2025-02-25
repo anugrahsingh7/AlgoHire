@@ -1,8 +1,32 @@
 "use client";
 import Image from "next/image";
 
+import { signIn, useSession } from "next-auth/react";
 import { loginUser } from "../../_lib/actions";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { getSession } from "next-auth/react";
+
 export default function Login() {
+
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const { data: session, status } = useSession();
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    const result = await loginUser(formData);
+    await getSession();
+
+    if (result.success) {
+      router.replace("/"); // Redirect to home after login
+    } else {
+      setError(result.message);
+    }
+  }
+
   return (
     <div className="flex w-full h-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
       {/* Background Image (Visible on large screens) */}
@@ -30,7 +54,9 @@ export default function Login() {
           Welcome back!
         </p>
 
-        <button className="flex items-center justify-center w-full mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+        <button 
+        onClick={()=>signIn("google",{ callbackUrl: "/" })}
+        className="flex items-center justify-center w-full mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
           <div className="px-4 py-2">
             {/* Google Icon */}
             <svg className="w-6 h-6" viewBox="0 0 40 40">
@@ -42,6 +68,20 @@ export default function Login() {
           </span>
         </button>
 
+        <button 
+        onClick={()=>signIn("github",{ callbackUrl: "/" })}
+        className="flex items-center justify-center w-full mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <div className="px-4 py-2">
+            {/* Google Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 40 40">
+              {/* SVG Path */}
+            </svg>
+          </div>
+          <span className="w-5/6 px-4 py-3 font-bold text-center">
+            Sign in with Github
+          </span>
+        </button>
+
         <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
           <span className="text-xs text-gray-500 uppercase dark:text-gray-400">
@@ -49,7 +89,7 @@ export default function Login() {
           </span>
           <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
         </div>
-        <form action={loginUser}>
+        <form onSubmit={handleSubmit}>
           <div className="mt-4">
             <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
               Email Address
@@ -92,7 +132,7 @@ export default function Login() {
         <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
           <a
-            href="#"
+            href="/auth/Signup"
             className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
           >
             or sign up

@@ -25,15 +25,10 @@ export async function connectToDatabase() {
 
   if (!cached.promise) {
     console.log("🛠️ Connecting to MongoDB...");
-    cached.promise = mongoose
-      .connect(MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-      .then((mongoose) => {
-        console.log("🚀 Connected to MongoDB");
-        return mongoose;
-      });
+    cached.promise = mongoose.connect(MONGODB_URI, {}).then((mongoose) => {
+      console.log("🚀 Connected to MongoDB");
+      return mongoose;
+    });
   }
 
   cached.conn = await cached.promise;
