@@ -5,10 +5,14 @@ import { IoClose } from "react-icons/io5";
 import { RiMenu4Line } from "react-icons/ri";
 import { ThemeProvider } from "../Context/ThemeContext";
 import { ThemeToggle } from "./ThemeToggle";
+import { RiMenu2Fill } from "react-icons/ri";
+import { useSidebar } from "../Context/SidebarContext";
+
 
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { setIsActive } = useSidebar();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -26,7 +30,17 @@ export default function Navbar() {
         <div className="container px-6 py-4 mx-auto">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="flex items-center justify-between">
+
+            <button 
+    onClick={() => setIsActive(prev => !prev)} 
+    className="me-2 text-xl dark:bg-gray-800 shadow-sm hover:opacity-75  dark:text-white cursor-pointer bg-gray-200 p-2 rounded-full"
+  >
+    <RiMenu2Fill />
+  </button>
             
+                
+
+
               <button onClick={() => router.push("/")}>
                 <img
                   className="w-auto h-6 sm:h-7"

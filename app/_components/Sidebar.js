@@ -10,9 +10,12 @@ import { CiMenuKebab, IoClose, IoDocument, IoLogIn } from "react-icons/io5";
 import { GrScorecard } from "react-icons/gr";
 import { FaCode, FaDiagramProject, FaBriefcase } from "react-icons/fa6";
 import { MdVideoCameraFront } from "react-icons/md";
+import { RiMenu2Fill } from "react-icons/ri";
+import { useSidebar } from "../Context/SidebarContext";
 
 export default function Sidebar({ userData }) {
-  const [isActive, setIsActive] = useState(false);
+  const { isActive, setIsActive } = useSidebar();
+
   const router = useRouter();
   const { data: session, status } = useSession();
   const Data = session?.user;
@@ -31,8 +34,26 @@ export default function Sidebar({ userData }) {
   return (
     <div className={`fixed top-0 left-0 h-screen z-10 flex transition-all duration-500 ease-in-out ${isActive ? "translate-x-0" : "-translate-x-64"}`}>
       {/* Sidebar */}
-      <aside className="w-64 h-screen px-5 py-8 overflow-y-auto bg-white shadow-lg border-r border-gray-200 dark:border-gray-700 dark:bg-[#0f0f0f]">
+      <aside className="w-[16rem] h-screen px-6  py-4 overflow-y-auto bg-white shadow-lg border-r border-gray-200 dark:border-gray-700 dark:bg-[#0f0f0f]">
+     <div className="flex items-center">
+      <button
+          onClick={() => setIsActive(!isActive)}
+          className="bg-gray-200 dark:bg-gray-800 dark:text-white shadow-sm hover:opacity-75 text-xl rounded-full p-2 mb-4 flex items-center  "
+        >
+          <IoClose /> 
+        </button>
+        {/* <button onClick={() => router.push("/")}>
+                <img
+                  className="w-auto h-6 sm:h-7"
+                  src="https://merakiui.com/images/full-logo.svg"
+                  alt=""
+                />
+              </button> */}
+              </div>
+              
         <div className="flex items-center space-x-4">
+          
+          
           <img
             className="w-14 h-14 rounded-full"
             src={userData?.image || "/default-avatar.png"}
@@ -66,7 +87,7 @@ export default function Sidebar({ userData }) {
                     setIsActive(false);
                     router.push(item.href);
                   }}
-                  className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700"
+                  className="flex items-center px-3 py-2 text-gray-800 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700"
                 >
                   {item.icon}
                   <span className="mx-2 text-sm font-medium">{item.name}</span>
@@ -89,7 +110,7 @@ export default function Sidebar({ userData }) {
             {session ? (
               <button
                 onClick={handleSubmit}
-                className="flex items-center w-full justify-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-red-600 hover:bg-red-700"
+                className="flex items-center w-full justify-center px-3 py-2 text-white transition-colors duration-300 transform rounded-lg  bg-red-600 hover:bg-red-700"
               >
                 <IoLogIn className="rotate-180" />
                 <span className="mx-2 text-sm font-medium">Logout</span>
@@ -97,7 +118,7 @@ export default function Sidebar({ userData }) {
             ) : (
               <button
                 onClick={() => router.push("/auth/Login")}
-                className="flex items-center w-full justify-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-green-600 hover:bg-green-700"
+                className="flex items-center w-full justify-center px-3 py-2 text-white transition-colors duration-300 transform rounded-lg  bg-green-600 hover:bg-green-700"
               >
                 <IoLogIn />
                 <span className="mx-2 text-sm font-medium">Log In</span>
@@ -108,14 +129,7 @@ export default function Sidebar({ userData }) {
       </aside>
 
       {/* Toggle Button */}
-      <div className="h-screen w-11 flex justify-start items-center">
-        <button
-          onClick={() => setIsActive(!isActive)}
-          className="w-[90%] dark:bg-[#0f0f0f] bg-white shadow-sm border-r border-t border-b border-gray-200 dark:border-gray-700 text-gray-600 flex justify-center items-center text-2xl py-10 rounded-e-2xl transition-transform duration-500 ease-in-out"
-        >
-          {isActive ? <IoClose /> : <></>}
-        </button>
-      </div>
+      
     </div>
   );
 }

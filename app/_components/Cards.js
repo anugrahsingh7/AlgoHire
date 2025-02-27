@@ -7,6 +7,7 @@ import {
   FaCalendar,
   FaGraduationCap,
 } from "react-icons/fa";
+import { RiMenu2Fill } from "react-icons/ri";
 import { IoLocation, IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 
@@ -222,7 +223,7 @@ const Cards = ({ cardsData = [] }) => {
   );
 
   return (
-    <div className="flex flex-col px-5 dark:bg-[#0f0f0f] min-h-screen sm:flex-row">
+    <div className="flex flex-col px-0 dark:bg-[#0f0f0f] min-h-screen sm:flex-row">
       {/* Filter Sidebar */}
       <div className={`w-full sm:w-1/4 bg-gray-100 dark:bg-[#0f0f0f] border-r border-r-gray-200 shadow-sm dark:border-r-gray-700 p-6 ${isFilterOpen ? 'block' : 'hidden'} sm:block`}>
         <h3 className="text-xl font-bold mb-6 dark:text-gray-200">Filters</h3>

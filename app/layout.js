@@ -6,6 +6,7 @@ import Navbar from "./_components/Navbar";
 import Sidebar from "./_components/Sidebar";
 import { auth } from "./_lib/auth";
 import { getUserData } from "./_lib/data-service";
+import { SidebarProvider } from "./Context/SidebarContext";
 import "./globals.css";
 
 export const metadata = {
@@ -25,15 +26,17 @@ export default async function RootLayout({ children }) {
       <body>
         <ToastContainer position="top-center" autoClose={3000}/>
         <SessionProvider>
-          <HiddenLayoutProvider>
-            <Navbar />
-            <Sidebar userData={userData}/>
-          </HiddenLayoutProvider>
-          <main className="w-screen min-h-max overflow-hidden  bg-white dark:bg-gray-900 transition-colors duration-300">{children}</main>
-          <HiddenLayoutProvider>
-            <Footer />
-          </HiddenLayoutProvider>
-        </SessionProvider>
+  <SidebarProvider>
+    <HiddenLayoutProvider>
+      <Navbar />
+      <Sidebar userData={userData}/>
+    </HiddenLayoutProvider>
+    <main className="w-screen min-h-max overflow-hidden  bg-white dark:bg-gray-900 transition-colors duration-300">{children}</main>
+    <HiddenLayoutProvider>
+      <Footer />
+    </HiddenLayoutProvider>
+  </SidebarProvider>
+</SessionProvider>
       </body>
     </html>
   );
