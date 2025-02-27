@@ -113,7 +113,7 @@ export default function Sidebar({ userData }) {
           onClick={() => setIsActive(!isActive)}
           className="w-[90%] dark:bg-[#0f0f0f] bg-white shadow-sm border-r border-t border-b border-gray-200 dark:border-gray-700 text-gray-600 flex justify-center items-center text-2xl py-10 rounded-e-2xl transition-transform duration-500 ease-in-out"
         >
-          {isActive ? <IoClose /> : <CiMenuKebab />}
+          {isActive ? <IoClose /> : <></>}
         </button>
       </div>
     </div>
