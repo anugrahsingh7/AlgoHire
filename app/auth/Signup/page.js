@@ -1,11 +1,27 @@
+"use client";
 import Image from "next/image";
 import { registerUser } from "../../_lib/actions";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { redirect } from "next/navigation";
 
 export default function Signup() {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const result = await registerUser(formData);
+
+    if (result.success) {
+      toast.success("Account created successfully!",{ autoClose: 1500 });
+      redirect("/auth/Login");
+    } else {
+      toast.error(result.message || "Signup failed. Please try again.");
+    }
+  }
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="flex justify-center min-h-screen">
-        {/* Left Image Section */}
         <div
           className="hidden bg-cover lg:block lg:w-2/5"
           style={{
@@ -14,7 +30,6 @@ export default function Signup() {
           }}
         ></div>
 
-        {/* Right Form Section */}
         <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
           <div className="w-full">
             <h1 className="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
@@ -40,9 +55,8 @@ export default function Signup() {
               </div>
             </div>
 
-            {/* Form Section */}
             <form
-              action={registerUser}
+              onSubmit={handleSubmit}
               className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2"
             >
               <div>

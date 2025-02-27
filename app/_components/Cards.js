@@ -1,6 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { FaStar, FaFileContract, FaBriefcase, FaCalendar, FaGraduationCap } from "react-icons/fa";
+import {
+  FaStar,
+  FaFileContract,
+  FaBriefcase,
+  FaCalendar,
+  FaGraduationCap,
+} from "react-icons/fa";
 import { IoLocation, IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 
@@ -21,67 +27,79 @@ const Cards = ({ cardsData = [] }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Filtered cards calculation
-  const filteredCards = cardsData.filter(card => {
+  const filteredCards = cardsData.filter((card) => {
     const searchLower = searchQuery.toLowerCase();
-    const companyName = card.companyName?.toLowerCase() || '';
-    const jobProfile = card.jobProfile?.toLowerCase() || '';
+    const companyName = card.companyName?.toLowerCase() || "";
+    const jobProfile = card.jobProfile?.toLowerCase() || "";
     const packageValue = parseFloat(card.package) || 0;
 
     return (
       (filters.location === "All" || card.location === filters.location) &&
       (filters.category === "All" || card.category === filters.category) &&
-      (filters.jobCategory === "All" || card.jobCategory === filters.jobCategory) &&
+      (filters.jobCategory === "All" ||
+        card.jobCategory === filters.jobCategory) &&
       (filters.jobType === "All" || card.jobType === filters.jobType) &&
-      (filters.skills.length === 0 || filters.skills.every(skill => 
-        card.skills?.includes(skill))) &&
-      (!filters.package.min || packageValue >= parseFloat(filters.package.min)) &&
-      (!filters.package.max || packageValue <= parseFloat(filters.package.max)) &&
+      (filters.skills.length === 0 ||
+        filters.skills.every((skill) => card.skills?.includes(skill))) &&
+      (!filters.package.min ||
+        packageValue >= parseFloat(filters.package.min)) &&
+      (!filters.package.max ||
+        packageValue <= parseFloat(filters.package.max)) &&
       (companyName.includes(searchLower) || jobProfile.includes(searchLower))
     );
   });
 
   // Get unique filter options
-  const locations = [...new Set(cardsData.map(card => card.location))].filter(Boolean);
-  const categories = [...new Set(cardsData.map(card => card.category))].filter(Boolean);
-  const jobCategories = [...new Set(cardsData.map(card => card.jobCategory))].filter(Boolean);
-  const jobTypes = [...new Set(cardsData.map(card => card.jobType))].filter(Boolean);
-  const allSkills = [...new Set(cardsData.flatMap(card => card.skills))].filter(Boolean);
+  const locations = [...new Set(cardsData.map((card) => card.location))].filter(
+    Boolean
+  );
+  const categories = [
+    ...new Set(cardsData.map((card) => card.category)),
+  ].filter(Boolean);
+  const jobCategories = [
+    ...new Set(cardsData.map((card) => card.jobCategory)),
+  ].filter(Boolean);
+  const jobTypes = [...new Set(cardsData.map((card) => card.jobType))].filter(
+    Boolean
+  );
+  const allSkills = [
+    ...new Set(cardsData.flatMap((card) => card.skills)),
+  ].filter(Boolean);
 
   // Filter handlers
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    if (name.startsWith('package')) {
-      setFilters(prev => ({
+    if (name.startsWith("package")) {
+      setFilters((prev) => ({
         ...prev,
         package: {
           ...prev.package,
-          [name.replace('package', '').toLowerCase()]: value
-        }
+          [name.replace("package", "").toLowerCase()]: value,
+        },
       }));
     } else {
-      setFilters(prev => ({ ...prev, [name]: value }));
+      setFilters((prev) => ({ ...prev, [name]: value }));
     }
   };
 
   const handleSkillChange = (skill) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
       skills: prev.skills.includes(skill)
-        ? prev.skills.filter(s => s !== skill)
-        : [...prev.skills, skill]
+        ? prev.skills.filter((s) => s !== skill)
+        : [...prev.skills, skill],
     }));
   };
 
   // Job Modal Component
   const JobModal = ({ job, onClose }) => {
     if (!job) return null;
-
     const handleApply = () => {
       try {
-        localStorage.setItem('selectedJob', JSON.stringify(job));
-        router.push('/apply');
+        localStorage.setItem("selectedJob", JSON.stringify(job));
+        router.push(`/Test?id=${job.id}`);
       } catch (error) {
-        console.error('Error saving job data:', error);
+        console.error("Error saving job data:", error);
       }
     };
 
@@ -101,7 +119,10 @@ const Cards = ({ cardsData = [] }) => {
                 <p className="text-gray-600">{job.companyName}</p>
               </div>
             </div>
-            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full">
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100 rounded-full"
+            >
               <IoClose size={24} />
             </button>
           </div>
@@ -109,17 +130,32 @@ const Cards = ({ cardsData = [] }) => {
           {/* Modal Body */}
           <div className="p-6 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <DetailItem icon={<FaBriefcase />} label="Experience" value={job.experienceLevel} />
-              <DetailItem icon={<FaCalendar />} label="Contract" value={job.contract} />
-              <DetailItem icon={<FaGraduationCap />} label="Package" value={`₹${job.package}`} />
+              <DetailItem
+                icon={<FaBriefcase />}
+                label="Experience"
+                value={job.experienceLevel}
+              />
+              <DetailItem
+                icon={<FaCalendar />}
+                label="Contract"
+                value={job.contract}
+              />
+              <DetailItem
+                icon={<FaGraduationCap />}
+                label="Package"
+                value={`₹${job.package}`}
+              />
             </div>
 
             <Section title="About Company" content={job.companyDescription} />
-            
+
             <Section title="Required Skills">
               <div className="flex flex-wrap gap-2">
                 {job.skills?.map((skill, i) => (
-                  <span key={i} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                  <span
+                    key={i}
+                    className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                  >
                     {skill}
                   </span>
                 ))}
@@ -139,7 +175,8 @@ const Cards = ({ cardsData = [] }) => {
             </Section>
 
             <div className="text-sm text-gray-600">
-              Application Deadline: {new Date(job.applicationDeadline).toLocaleDateString()}
+              Application Deadline:{" "}
+              {new Date(job.applicationDeadline).toLocaleDateString()}
             </div>
 
             <div className="flex justify-end pt-4 border-t">
@@ -162,7 +199,7 @@ const Cards = ({ cardsData = [] }) => {
       <span className="text-blue-600">{icon}</span>
       <div>
         <p className="text-sm text-gray-600">{label}</p>
-        <p className="font-medium">{value || 'Not specified'}</p>
+        <p className="font-medium">{value || "Not specified"}</p>
       </div>
     </div>
   );
@@ -176,7 +213,11 @@ const Cards = ({ cardsData = [] }) => {
 
   const List = ({ items }) => (
     <ul className="list-disc list-inside space-y-1">
-      {items?.map((item, i) => <li key={i} className="text-gray-700">{item}</li>)}
+      {items?.map((item, i) => (
+        <li key={i} className="text-gray-700">
+          {item}
+        </li>
+      ))}
     </ul>
   );
 
@@ -235,7 +276,7 @@ const Cards = ({ cardsData = [] }) => {
               <span className="text-gray-400 ">{filters.skills.length} skills selected</span>
               <span className={`transform text-gray-400 ${isSkillsOpen ? 'rotate-180' : ''}`}>▼</span>
             </button>
-            
+
             {isSkillsOpen && (
               <div className="absolute z-10 w-full mt-2  bg-white border shadow-lg  border-gray-200 dark:border-gray-700 rounded-lg dark:bg-opacity-30 dark:text-white dark:bg-gray-800">
                 <div className="max-h-48 overflow-y-auto p-2">
@@ -334,10 +375,12 @@ const Cards = ({ cardsData = [] }) => {
         onClick={() => setIsFilterOpen(!isFilterOpen)}
         className="sm:hidden fixed bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg"
       >
-        {isFilterOpen ? '✕' : '☰'}
+        {isFilterOpen ? "✕" : "☰"}
       </button>
 
-      {isModalOpen && <JobModal job={selectedJob} onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <JobModal job={selectedJob} onClose={() => setIsModalOpen(false)} />
+      )}
     </div>
   );
 };
@@ -352,8 +395,10 @@ const FilterSection = ({ label, name, options, value, onChange }) => (
       className="w-full p-2 dark:bg-gray-800 text-sm dark:bg-opacity-30 dark:border-gray-700 border-gray-200 text-gray-500 dark:text-gray-400 border rounded"
     >
       <option value="All">All {label}</option>
-      {options.map(option => (
-        <option key={option} value={option}>{option}</option>
+      {options.map((option) => (
+        <option key={option} value={option}>
+          {option}
+        </option>
       ))}
     </select>
   </div>

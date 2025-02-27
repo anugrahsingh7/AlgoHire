@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const CompanySchema = new Schema(
     {
-        CompanynName: String,
+        CompanyName: String,
         CompanyLogo: String,
         CompanyAbout: String,
         Category: String,
