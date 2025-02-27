@@ -86,7 +86,7 @@ const Cards = ({ cardsData = [] }) => {
     };
 
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 bg-[#0f0f0f]  z-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
           {/* Modal Header */}
           <div className="sticky top-0 bg-white border-b p-4 flex justify-between items-center">
@@ -181,18 +181,19 @@ const Cards = ({ cardsData = [] }) => {
   );
 
   return (
-    <div className="flex flex-col min-h-screen sm:flex-row">
+    <div className="flex flex-col px-5 dark:bg-[#0f0f0f] min-h-screen sm:flex-row">
       {/* Filter Sidebar */}
-      <div className={`w-full sm:w-1/4 bg-gray-100 p-6 ${isFilterOpen ? 'block' : 'hidden'} sm:block`}>
-        <h3 className="text-xl font-bold mb-6">Filters</h3>
+      <div className={`w-full sm:w-1/4 bg-gray-100 dark:bg-[#0f0f0f] border-r border-r-gray-200 shadow-sm dark:border-r-gray-700 p-6 ${isFilterOpen ? 'block' : 'hidden'} sm:block`}>
+        <h3 className="text-xl font-bold mb-6 dark:text-gray-200">Filters</h3>
         
-        <div className="space-y-6">
+        <div className="space-y-6 dark:text-gray-200 ">
           <FilterSection
             label="Location"
             name="location"
             options={locations}
             value={filters.location}
             onChange={handleFilterChange}
+            className="dark:bg-gray-400"
           />
 
           <FilterSection
@@ -212,7 +213,7 @@ const Cards = ({ cardsData = [] }) => {
                 value={filters.package.min}
                 onChange={handleFilterChange}
                 placeholder="Min"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg dark:bg-opacity-30 dark:text-white dark:bg-gray-800"
               />
               <input
                 type="number"
@@ -220,7 +221,7 @@ const Cards = ({ cardsData = [] }) => {
                 value={filters.package.max}
                 onChange={handleFilterChange}
                 placeholder="Max"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-lg dark:bg-opacity-30 dark:text-white dark:bg-gray-800 "
               />
             </div>
           </div>
@@ -229,17 +230,17 @@ const Cards = ({ cardsData = [] }) => {
             <label className="block text-sm font-medium mb-2">Skills</label>
             <button
               onClick={() => setIsSkillsOpen(!isSkillsOpen)}
-              className="w-full p-2 border rounded flex justify-between items-center"
+              className="w-full p-2  flex justify-between items-center border bg-white  border-gray-200 dark:border-gray-700 rounded-lg dark:bg-opacity-30 dark:text-white dark:bg-gray-800"
             >
-              <span>{filters.skills.length} skills selected</span>
-              <span className={`transform ${isSkillsOpen ? 'rotate-180' : ''}`}>▼</span>
+              <span className="text-gray-400 ">{filters.skills.length} skills selected</span>
+              <span className={`transform text-gray-400 ${isSkillsOpen ? 'rotate-180' : ''}`}>▼</span>
             </button>
             
             {isSkillsOpen && (
-              <div className="absolute z-10 w-full mt-2 bg-white border rounded shadow-lg">
+              <div className="absolute z-10 w-full mt-2  bg-white border shadow-lg  border-gray-200 dark:border-gray-700 rounded-lg dark:bg-opacity-30 dark:text-white dark:bg-gray-800">
                 <div className="max-h-48 overflow-y-auto p-2">
                   {allSkills.map(skill => (
-                    <label key={skill} className="flex items-center p-2 hover:bg-gray-50">
+                    <label key={skill} className="flex items-center p-2 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg">
                       <input
                         type="checkbox"
                         checked={filters.skills.includes(skill)}
@@ -257,50 +258,50 @@ const Cards = ({ cardsData = [] }) => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-6 dark:bg-[#0f0f0f] ">
         <div className="mb-6">
           <input
             type="text"
             placeholder="Search companies or positions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-4 border rounded-lg"
+            className="w-full p-4 border border-gray-200 dark:border-gray-700 rounded-lg dark:bg-opacity-30 dark:text-white dark:bg-gray-800"
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {filteredCards.map(card => (
-            <div key={card.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <div key={card.id} className="bg-white dark:bg-opacity-30 dark:text-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700    rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-4">
                     <img
                       src={card.companyLogo}
                       alt={card.companyName}
-                      className="w-12 h-12 rounded-full object-cover"
+                      className="w-12 h-12 rounded-full bg-white p-2 border border-gray-200 dark:border-gray-700 object-cover"
                     />
                     <div>
                       <h3 className="text-xl font-semibold">{card.companyName}</h3>
-                      <p className="text-gray-600">{card.jobProfile}</p>
+                      <p className="dark:text-gray-400 text-gray-500">{card.jobProfile}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 text-sm text-gray-600">
+                  <div className="flex items-center gap-1 text-sm text-gray-700 dark:text-gray-300">
                     <FaStar className="text-yellow-500" />
-                    <span>{card.difficulty}/5</span>
+                    <span >{card.difficulty}/5</span>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div>
-                    <p className="font-medium">Key Skills:</p>
+                    <p className="font-medium text-gray-700 dark:text-gray-300">Key Skills:</p>
                     <ul className="list-disc pl-4">
                       {card.skills.slice(0, 3).map(skill => (
-                        <li key={skill} className="text-sm">{skill}</li>
+                        <li key={skill} className="text-sm text-gray-600 dark:text-gray-200 ">{skill}</li>
                       ))}
                     </ul>
                   </div>
-                  <div className="text-right">
-                    <p className="text-green-600 font-medium">{card.hiringStatus}</p>
+                  <div className="text-right text-gray-700 dark:text-gray-300">
+                   
                     <p>₹{card.package}</p>
                     <div className="flex items-center justify-end gap-1">
                       <IoLocation />
@@ -348,7 +349,7 @@ const FilterSection = ({ label, name, options, value, onChange }) => (
       name={name}
       value={value}
       onChange={onChange}
-      className="w-full p-2 border rounded"
+      className="w-full p-2 dark:bg-gray-800 text-sm dark:bg-opacity-30 dark:border-gray-700 border-gray-200 text-gray-500 dark:text-gray-400 border rounded"
     >
       <option value="All">All {label}</option>
       {options.map(option => (

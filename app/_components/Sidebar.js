@@ -12,15 +12,18 @@ import { FaBriefcase } from "react-icons/fa";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { IoLogIn } from "react-icons/io5";
 import { signOut, useSession } from "next-auth/react";
 
 export default function Sidebar({ userData }) {
   const [isActive, setIsActive] = useState(false);
   const router = useRouter();
+  
 
   const { data: session, status } = useSession();
   const Data = session?.user;
   console.log(session);
+  
 
   return (
     <div
@@ -99,13 +102,26 @@ export default function Sidebar({ userData }) {
              <h3 className=""></h3>
             }
 
-            <button
+             {session ? (
+             <button
               onClick={() => signOut({ callbackUrl: "/auth/Login" })}
               className="flex items-center w-full justify-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-red-600 hover:bg-red-700"
             >
-              <AiOutlineLogout />
+               <IoLogIn className="rotate-180"/>
               <span className="mx-2 text-sm font-medium">Logout</span>
             </button>
+              ):(
+             
+             <button
+              onClick={() => signOut({ callbackUrl: "/auth/Login" })}
+              className="flex items-center w-full justify-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 bg-green-600 hover:bg-green-700"
+            >
+              <IoLogIn />
+              <span className="mx-2 text-sm font-medium">Log In</span>
+            </button>
+             )}
+
+            
           </div>
         </div>
       </aside>

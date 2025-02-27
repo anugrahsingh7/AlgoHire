@@ -4,8 +4,8 @@ import React from 'react';
 
 const Subscription = () => {
   return (
-    <div className="bg-white dark:bg-[#0f0f0f]">
-      <div className="container px-12 py-8 mx-auto">
+    <div className="bg-white min-h-max py-10  dark:bg-[#0f0f0f]">
+      <div className="container w-full min-h-max flex items-center  px-14 py-8 mx-auto">
         <div className="xl:items-center xl:-mx-8 xl:flex">
           <div className="flex flex-col items-center xl:items-start xl:mx-8">
             <h1 className="text-2xl font-medium text-gray-800 capitalize lg:text-3xl dark:text-white">
@@ -46,7 +46,7 @@ const Subscription = () => {
             {/* Pricing Cards */}
             <div className="mt-8 space-y-8 md:-mx-4 md:flex md:items-center md:justify-center md:space-y-0 xl:mt-0">
               {/* Essential Plan */}
-              <div className="max-w-sm mx-auto border rounded-lg md:mx-4 dark:border-gray-700">
+              <div className="max-w-sm mx-auto shadow-md  hover:shadow-lg  scale-95 hover:scale-100 transition-all ease-in-out duration-300 border rounded-lg md:mx-4 dark:border-gray-700">
                 <div className="p-6">
                   <h1 className="text-xl font-medium text-gray-700 capitalize lg:text-2xl dark:text-white">
                     Essential
@@ -55,7 +55,7 @@ const Subscription = () => {
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum quam voluptatibus
                   </p>
                   <h2 className="mt-4 text-2xl font-semibold text-gray-700 sm:text-3xl dark:text-gray-300">
-                    $3.00 <span className="text-base font-medium">/Month</span>
+                    Free <span className="text-base font-medium">/Month</span>
                   </h2>
                   <p className="mt-1 text-gray-500 dark:text-gray-300">Yearly payment</p>
                   <button className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
@@ -69,7 +69,7 @@ const Subscription = () => {
                   </h1>
                   {/* Features List */}
                   <div className="mt-8 space-y-4">
-                    {["All limited links", "Own analytics platform", "Chat support", "Optimize hashtags"].map((feature, index) => (
+                    {["All limited links", "Own analytics platform", "Chat support"].map((feature, index) => (
                       <div key={index} className="flex items-center">
                         <svg className="w-5 h-5 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                           <path
@@ -85,7 +85,7 @@ const Subscription = () => {
                 </div>
               </div>
               {/* Premium Plan */}
-              <div className="max-w-sm mx-auto border rounded-lg md:mx-4 dark:border-gray-700">
+              <div className="max-w-sm shadow-md  hover:shadow-lg  scale-95 hover:scale-100 transition-all ease-in-out duration-300  mx-auto border rounded-lg md:mx-4 dark:border-gray-700">
                 <div className="p-6">
                   <h1 className="text-xl font-medium text-gray-700 capitalize lg:text-2xl dark:text-white">
                     Premium
@@ -94,7 +94,7 @@ const Subscription = () => {
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum quam voluptatibus
                   </p>
                   <h2 className="mt-4 text-2xl font-semibold text-gray-700 sm:text-3xl dark:text-gray-300">
-                    $50.00 <span className="text-base font-medium">/Lifetime</span>
+                    Free <span className="text-base font-medium">/Lifetime</span>
                   </h2>
                   <p className="mt-1 text-gray-500 dark:text-gray-300">One time payment</p>
                   <button className="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">

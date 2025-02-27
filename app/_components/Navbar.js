@@ -6,6 +6,7 @@ import { RiMenu4Line } from "react-icons/ri";
 import { ThemeProvider } from "../Context/ThemeContext";
 import { ThemeToggle } from "./ThemeToggle";
 
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function Navbar() {
         <div className="container px-6 py-4 mx-auto">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="flex items-center justify-between">
+            
               <button onClick={() => router.push("/")}>
                 <img
                   className="w-auto h-6 sm:h-7"
@@ -102,6 +104,7 @@ export default function Navbar() {
           </div>
         </div>
         <ThemeToggle />
+
       </nav>
     </ThemeProvider>
   );
