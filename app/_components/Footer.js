@@ -9,7 +9,7 @@ const Footer = () => {
   const router = useRouter(); // Initialize useRouter
 
   return (
-    <footer className="flex justify-center px-4 text-gray-800 bg-white dark:text-white dark:bg-gray-900">
+    <footer className="flex justify-center px-4 text-gray-800 bg-white dark:text-white dark:bg-[#0f0f0f] border-t-gray-200 dark:border-t-gray-700 border-t"  >
       <div className="container px-6 py-6">
         <h1 className="text-lg font-bold text-center lg:text-2xl">
           Join 31,000+ others and never miss <br /> out on new tips, tutorials, and more.
@@ -21,7 +21,7 @@ const Footer = () => {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+            className="px-4 py-2 text-sm  text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
             placeholder="Email Address"
           />
 

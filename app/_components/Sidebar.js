@@ -29,19 +29,19 @@ export default function Sidebar({ userData }) {
       }`}
     >
       {/* Sidebar */}
-      <aside className="w-64 h-screen px-5 py-8 overflow-y-auto bg-white shadow-lg dark:bg-gray-900">
+      <aside className="w-64 h-screen px-5 py-8 overflow-y-auto bg-white shadow-lg border-r border-gray-200 dark:border-gray-700 dark:bg-[#0f0f0f]">
         <div className="flex items-center space-x-4">
           <img
             className="w-14 h-14 rounded-full"
             src={userData?.image || "/default-avatar.png"}
             alt="User Profile"
           />
-          <div>
-            <h1 className="text-lg font-semibold text-white">
+          <div className="">
+            <h1 className="text-sm font-semibold text-gray-800 dark:text-white">
             {status === "loading" ? "Loading..." : Data?.name || "Guest"}
             </h1>
             <Link href="/profile">
-              <span className="text-sm text-white cursor-pointer hover:underline">
+              <span className="text-sm text-gray-600 dark:text-white font-light cursor-pointer hover:underline">
                 Edit Profile
               </span>
             </Link>
@@ -96,7 +96,7 @@ export default function Sidebar({ userData }) {
              <li key={item}>{item}</li>
              )}
             </ul> : 
-             <h3 className="max-w-md px-3 -mt-4 mb-4 space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 underline">Edit your profile to add more skills</h3>
+             <h3 className=""></h3>
             }
 
             <button
@@ -114,7 +114,7 @@ export default function Sidebar({ userData }) {
       <div className="h-screen w-11 flex justify-start items-center">
         <button
           onClick={() => setIsActive(!isActive)}
-          className="w-[90%] bg-gray-900 text-white flex justify-center items-center text-2xl py-10 rounded-e-2xl transition-transform duration-500 ease-in-out"
+          className="w-[90%] dark:bg-[#0f0f0f] bg-white shadow-sm border-r border-t border-b  border-gray-200 dark:border-gray-700 text-gray-600 flex justify-center items-center text-2xl py-10 rounded-e-2xl transition-transform duration-500 ease-in-out"
         >
           {isActive ? <IoClose /> : <CiMenuKebab />}
         </button>

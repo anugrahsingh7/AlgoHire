@@ -4,8 +4,8 @@ import React from 'react';
 
 const Subscription = () => {
   return (
-    <div className="bg-white dark:bg-gray-900">
-      <div className="container px-6 py-8 mx-auto">
+    <div className="bg-white dark:bg-[#0f0f0f]">
+      <div className="container px-12 py-8 mx-auto">
         <div className="xl:items-center xl:-mx-8 xl:flex">
           <div className="flex flex-col items-center xl:items-start xl:mx-8">
             <h1 className="text-2xl font-medium text-gray-800 capitalize lg:text-3xl dark:text-white">

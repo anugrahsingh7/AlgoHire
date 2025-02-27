@@ -20,7 +20,7 @@ export default async function RootLayout({ children }) {
             <Navbar />
             <Sidebar userData={userData}/>
           </HiddenLayoutProvider>
-          <main className="w-screen min-h-max overflow-hidden">{children}</main>
+          <main className="w-screen min-h-max overflow-hidden  bg-white dark:bg-gray-900 transition-colors duration-300">{children}</main>
           <HiddenLayoutProvider>
             <Footer />
           </HiddenLayoutProvider>
