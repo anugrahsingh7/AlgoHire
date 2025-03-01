@@ -7,6 +7,9 @@ import { useState } from "react";
 import { getSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FcGoogle } from "react-icons/fc";
+import { ThemeProvider } from "@/app/Context/ThemeContext";
+import { ThemeToggle } from "@/app/_components/ThemeToggle";
 
 export default function Login() {
   const router = useRouter();
@@ -38,49 +41,55 @@ export default function Login() {
   };
 
   return (
-    <div className="flex w-full h-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
+    <ThemeProvider>
+    <div className=" flex w-screen h-screen overflow-hiddenshadow-lg dark:bg-[#0f0f0f] justify-center  items-center bg-gray-100">
       <div
-        className="hidden bg-cover lg:block lg:w-1/2"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1575&q=80')",
-        }}
-      ></div>
+        className="hidden bg-cover lg:block lg:w-2/3">
+         <img
+                  className="w-full h-full object-cover"
+                  src="/photo2.jpeg"
+                  alt="AlgoHire"
+                />
+  
 
-      <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
-        <div className="flex justify-center mx-auto">
-          <Image
-            src="https://merakiui.com/images/logo.svg"
-            alt="Logo"
-            width={100}
-            height={30}
-            className="w-auto h-7 sm:h-8"
-          />
-        </div>
+      </div>
 
-        <p className="mt-3 text-xl text-center text-gray-600 dark:text-gray-200">
-          Welcome back!
+      <div className="w-full  px-6 py-8 md:px-8 lg:w-1/3 dark:bg-[#0f0f0f]">
+       
+
+        <div className="flex justify-between mx-auto items-center " >
+                <div className="flex items-center">
+                <img
+                  className="w-auto h-5 sm:h-6 me-1"
+                  src="/AlogHireIcon-removebg-preview.png"
+                  alt="AlgoHire"
+                />
+                <span className="text-2xl text-gray-800 dark:text-gray-200  font-semibold">AlgoHire</span>
+                </div>
+
+                <ThemeToggle/>
+              </div>
+
+        <p className="mt-4 text-xl text-left text-gray-600 dark:text-gray-300 ">
+          WELCOME BACK !
         </p>
 
-        <button 
+        {/* <button 
           onClick={handleGoogleSignIn}
-          className="flex items-center justify-center w-full mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+          className="flex items-center justify-center w-full mt-2 dark:text-gray-200 text-gray-800 transition-colors duration-300 transform border border-gray-300  dark:border-gray-700 hover:shadow-sm rounded-lg  hover:bg-gray-900 "
         >
-          <div className="px-4 py-2">
-            <svg className="w-6 h-6" viewBox="0 0 40 40"></svg>
-          </div>
-          <span className="w-5/6 px-4 py-3 font-bold text-center">
-            Sign in with Google
+          <span className="w-5/6 px-4 py-3 flex justify-center items-center font-bold text-center">
+          <FcGoogle className="me-1 text-2xl " /> Sign in with Google
           </span>
-        </button>
+        </button> */}
 
-        <div className="flex items-center justify-between mt-4">
+        {/* <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
           <span className="text-xs text-gray-500 uppercase dark:text-gray-400">
             or login with email
           </span>
           <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
-        </div>
+        </div> */}
 
         <form onSubmit={handleSubmit}>
           <div className="mt-4">
@@ -91,6 +100,7 @@ export default function Login() {
               name="email"
               className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="email"
+              placeholder="Enter your email"
             />
           </div>
 
@@ -110,30 +120,51 @@ export default function Login() {
               name="password"
               className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="password"
+              placeholder="Enter your password"
             />
           </div>
 
           <div className="mt-6">
             <button
               type="submit"
-              className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+              className="w-full px-6 py-3 text-sm font-medium hover:shadow-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
             >
               Sign In
             </button>
           </div>
+          <div className="flex items-center justify-between mt-4">
+          <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
+          <span className="text-xs text-gray-500 uppercase dark:text-gray-400">
+            or login with email
+          </span>
+          <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
+        </div>
+
+          <button 
+          onClick={handleGoogleSignIn}
+          className="flex items-center justify-center w-full mt-2 dark:text-gray-200 text-gray-800 transition-colors duration-300 transform border border-gray-300  dark:border-gray-700 hover:shadow-sm rounded-lg  hover:bg-gray-300 hover:dark:bg-gray-700 "
+        >
+          <span className="w-5/6 px-4 py-3 flex justify-center items-center font-bold text-center">
+          <FcGoogle className="me-1 text-2xl " /> Sign in with Google
+          </span>
+        </button>
         </form>
 
         <div className="flex items-center justify-between mt-4">
-          <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+          <span className="w-1/7 border-b dark:border-gray-600 md:w-1/6"></span>
           <a
             href="/auth/Signup"
             className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
           >
-            or sign up
+            or Don't have an account? Sign up
           </a>
-          <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+          <span className="w-1/7 border-b dark:border-gray-600 md:w-1/6"></span>
         </div>
+
+
+        
       </div>
     </div>
+    </ThemeProvider>
   );
 }
