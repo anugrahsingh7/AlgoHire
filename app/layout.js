@@ -11,9 +11,12 @@ import "./globals.css";
 
 export const metadata = {
   title: {
-    default: "AlgoHire",
+    default: "AlgoHire - AI-Powered Developer Hiring & Assessment Platform",
   },
-  description: "A brief description of your app.",
+  description: "AlgoHire is an AI-powered developer hiring and assessment platform that helps companies streamline their recruitment process. It dynamically generates technical and problem-solving questions based on job roles, evaluates coding challenges in real time, and provides detailed candidate performance reports. With features like AI-driven question generation, real-time coding assessments, automated reports, and integrated video interviews, AlgoHire ensures companies can efficiently identify and hire top tech talent.",
+  icons: {
+    icon: "/AlogHireIcon-removebg-preview.png", // Path to your favicon
+  },
 };
 
 export default async function RootLayout({ children }) {

@@ -27,13 +27,13 @@ export default function Navbar() {
   return (
     <ThemeProvider>
       <nav className="relative flex items-center bg-white shadow-sm dark:bg-[#0f0f0f] border-b-gray-200 dark:border-b-gray-700 border-b">
-        <div className="container px-6 py-4 mx-auto">
+        <div className="container px-6 py-2 mx-auto">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="flex items-center justify-between">
 
             <button 
     onClick={() => setIsActive(prev => !prev)} 
-    className="me-2 text-xl dark:bg-gray-800 shadow-sm hover:opacity-75  dark:text-white cursor-pointer bg-gray-200 p-2 rounded-full"
+    className="me-2 text-2xl   shadow-sm hover:opacity-75  dark:text-gray-200 text-gray-800 cursor-pointer  rounded-full"
   >
     <RiMenu2Fill />
   </button>
@@ -41,12 +41,13 @@ export default function Navbar() {
                 
 
 
-              <button onClick={() => router.push("/")}>
+              <button className="flex items-center cursor-pointer " onClick={() => router.push("/")}>
                 <img
-                  className="w-auto h-6 sm:h-7"
-                  src="https://merakiui.com/images/full-logo.svg"
-                  alt=""
+                  className="w-auto h-5 sm:h-6 me-1 ms-3"
+                  src="/AlogHireIcon-removebg-preview.png"
+                  alt="AlgoHire"
                 />
+                <span className="text-2xl text-gray-800 dark:text-gray-200 font-semibold">AlgoHire</span>
               </button>
 
               {/* Mobile menu button */}
